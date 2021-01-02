@@ -1,0 +1,46 @@
+<form class="form-inline my-2 my-lg=0" action="/search">
+	<input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" aria-label="Search">
+	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+<div class="normal">
+<table border="1" width="800" cellpadding="1" cellspacing="1">
+	<thread>
+		<th>Title</th>
+		<th>Type</th>
+		<th>Gear quantity</th>
+        <th>Price</th>
+		<% if session[:user_id].present? %>
+		<th>Add to basket</th>
+		<% @user=User.find(session[:user_id]) %>
+		<% if @user.adminrights=="true" %>
+		<th colspan="2">Action</th>
+		<% end %>
+		<% end %>
+	</thread>
+	<tbody>
+    <% @Shop.each do |f|%>
+	<tr>
+		<td><%= f.title %></td>
+		<td><%= f.biketypes %></td>
+		<td><%= f.gearquantity %></td>
+        <td><%= f.price %></td>
+		<% if session[:user_id].present? %>
+		<% @user=User.find(session[:user_id]) %>
+		<td><%= link_to "add" , :controller => :shops,:action => :basket ,id:f.id %></td>
+		<% if @user.adminrights=="true" %>
+<td><%= link_to "edit" , :controller => :shops,:action => :edit ,id:f.id %></td>
+
+<td>
+	<%= link_to "delete" ,:controller => :shops, :action => :delete ,id:f.id %>
+		
+	</td>
+	</tr>
+	<% end %>
+	<% end %>
+<% end %>
+
+
+
+	</tbody>
+</table>
+</div>

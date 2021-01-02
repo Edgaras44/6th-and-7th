@@ -1,0 +1,21 @@
+<%= form_for @Shop, url:{action: "update"} do|e| %>
+<p>
+	<%= e.label :title %>
+	<%= e.text_field :title %>
+</p>
+<p>
+ 	<%= e.label :biketypes %>
+	<%= e.text_field :biketypes %>
+</p>
+<p>
+	<%= e.label :gearquantity %>
+	<%= e.text_area :gearquantity %>
+</p>
+<p>
+	<%= e.label :price %>
+	<%= e.text_area :price %>
+</p>
+<%= e.submit("Update")%>
+<% end %>
+
+

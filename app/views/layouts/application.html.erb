@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bikeshop</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+body  {
+  background-image: url("https://wallpaperaccess.com/full/333369.jpg");
+}
+</style>
+  </head>
+
+<br>
+<div class="main_buttons">
+<%= link_to "Home", home_path %>
+  <a href="shop">Shop</a>
+<%= link_to "Contacts", contacts_path %>
+</div>
+<footer>
+<% if session[:user_id].nil? %>
+      <%= link_to "Login", users_login_path %>
+  	  <%= link_to "Register", users_register_path %>
+      <% else %>
+      <% @user=User.find(session[:user_id]) %>
+       Logged in  as :<%=@user.name %>
+          <br>
+          <% if @user.adminrights=="true" %>
+          ADMIN
+          <% end %>
+       <br>
+      <%= link_to "Log out",:controller => :bikes, :action => :logout %>
+<% end %>
+</footer>
+<br>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
